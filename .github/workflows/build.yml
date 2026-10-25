@@ -1,4 +1,4 @@
-name: Build EXE
+name: Build Game (EXE & Web)
 
 on:
   workflow_dispatch:
@@ -15,6 +15,15 @@ jobs:
         with:
           node-version: 18
 
+      - name: Install & Build Vite Web App
+        run: |
+          npm install
+          npm run build
+
+      - name: Zip Web Build (dist folder)
+        run: |
+          cd dist && zip -r ../Room99-Web.zip ./*
+
       - name: Compile EXE with Custom Logo
         run: |
           npx nativefier "https://room99-eight.vercel.app/" \
@@ -24,10 +33,16 @@ jobs:
             --arch x64 \
             ./out
 
-      - name: Zip the Output
+      - name: Zip EXE Output
         run: zip -r Room99-Windows.zip ./out
 
-      - name: Save Artifact
+      - name: Save Web Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Web-HTML5-Build
+          path: Room99-Web.zip
+
+      - name: Save EXE Artifact
         uses: actions/upload-artifact@v4
         with:
           name: Windows-EXE
