@@ -15,10 +15,11 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install Dependencies & Build Web
-        run: |
-          npm install
-          npm run build
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Build Web App (Vite)
+        run: npx vite build
 
       - name: Zip Web Build (dist folder)
         run: |
