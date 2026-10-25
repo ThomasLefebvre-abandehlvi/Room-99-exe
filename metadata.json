@@ -1,0 +1,6 @@
+{
+  "name": "Room 99 - The Vault",
+  "description": "The first 98 rooms were built to keep something out. Room 99 was built to keep something in. Descend through 99 subterranean chambers, shatter Echo Matter bulkheads, and uncover the truth behind NINE.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
