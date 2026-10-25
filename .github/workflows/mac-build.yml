@@ -1,0 +1,34 @@
+name: Build macOS App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-mac:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build macOS App with Nativefier
+        run: |
+          npx nativefier "https://room99-eight.vercel.app/" \
+            --name "Room 99 - The Vault" \
+            --icon "./room99logo.jpg" \
+            --platform macos \
+            --arch x64 \
+            ./out
+
+      - name: Zip macOS App
+        run: zip -r Room99-macOS.zip ./out
+
+      - name: Save macOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-Executable
+          path: Room99-macOS.zip
