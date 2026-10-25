@@ -15,11 +15,13 @@ jobs:
         with:
           node-version: 20
 
+      - name: Create Output Directory
+        run: mkdir -p out
+
       - name: Build macOS App with Nativefier
         run: |
           npx nativefier "https://room99-eight.vercel.app/" \
             --name "Room 99 - The Vault" \
-            --icon "./room99logo.jpg" \
             --platform macos \
             --arch x64 \
             ./out
